@@ -44,11 +44,10 @@ class action_plugin_botbouncer extends DokuWiki_Action_Plugin {
         $mollomPrivateKey = $this->getConf('mollomprivatekey');
         $continue = $this->getConf('continue');
         $spamError = $this->getConf('spamerror');
-        $sk = array_keys($_SESSION)[0];
         include dirname(__FILE__).'/lib/botbouncer.php';
         $fsc = new botBouncer($honeypotApiKey,$akismetApiKey,$akismetUrl,$mollomPrivateKey,$mollomPublicKey);
         $fsc->setLogRoot($GLOBALS['conf']['cachedir']);
-        if (1 || $fsc->isSpam(
+        if ($fsc->isSpam(
           array(
             'username' => $_SESSION[DOKU_COOKIE]['auth']['info']['name'],
             'email' => $_SESSION[DOKU_COOKIE]['auth']['info']['mail'],
