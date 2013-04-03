@@ -4,8 +4,8 @@ if(!defined('DOKU_INC')) die();
 
 if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
 require_once(DOKU_PLUGIN.'admin.php');
-        error_reporting(E_ALL);
-       ini_set('display_errors',true);
+        //error_reporting(E_ALL);
+       //ini_set('display_errors',true);
 
 /**
  * All DokuWiki plugins to extend the admin function
