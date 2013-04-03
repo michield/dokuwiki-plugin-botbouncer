@@ -1,0 +1,7 @@
+base   botbouncer
+author Michiel Dethmers
+email  hello@botbouncer.org
+date   2013-03-24
+name   Botbouncer Plugin 
+desc   Use online anti-spam services to stop bot registrations
+url    http://www.dokuwiki.org/plugin:botbouncer
