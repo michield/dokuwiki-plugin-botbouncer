@@ -12,16 +12,15 @@ This plugin for Dokuwiki uses the class to block spam signups to Dokuwiki.
 
 Currently works with:
 
-1. stopforumspam.com
-2. akismet
-3. mollom
-4. honeypotproject
+1. stopforumspam.com (free service)
+2. akismet.com (paid for service)
+3. mollom.com (free for small volume, paid for larger)
+4. projecthoneypot.org (free service)
 
-
-Todo:
-write some docs
-tidy up
-show statistics
+TODO:
+write some docs,
+tidy up,
+show statistics,
 clean out existing users
 
 History:
