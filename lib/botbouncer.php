@@ -57,7 +57,7 @@ class botBouncer {
   private $LE = "\n";
   private $honeyPotApiKey = '';
   private $akismetApiKey = '';
-  private $akismetBlogURL = 'http://www.phplist.com';
+  private $akismetBlogURL = '';
   private $memCached = false;
   private $doHpCheck = false;
   private $akismetEnabled = false;
@@ -390,7 +390,7 @@ class botBouncer {
       );
 
       $keyValid = $this->doPOST('http://rest.akismet.com/1.1/verify-key',$request);
-#      $this->addLogEntry('akismet.log','KEY CHECK: '.$keyValid.' http://rest.akismet.com/1.1/verify-key'.serialize($request));
+      $this->addLogEntry('akismet.log','KEY CHECK: '.$keyValid.' http://rest.akismet.com/1.1/verify-key'.serialize($request));
       $this->setCache('akismetKeyValid',$keyValid);
     } else {
       $this->addLogEntry('akismet.log','KEY CHECK (cached) '.$cached);
