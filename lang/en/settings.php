@@ -14,3 +14,4 @@ $lang['mollompublickey'] = 'Public Key for Mollom service';
 $lang['usestopforumspam'] = 'Use the Stopforumspam API';
 $lang['continue'] = 'Continue checking on match';
 $lang['spamerror'] = 'Text to display when spam matched';
+$lang['whitelist'] = 'Whitelisted IPs, separate with comma';

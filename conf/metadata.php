@@ -13,3 +13,4 @@ $meta['mollompublickey'] = array('string');
 #$meta['usestopforumspam'] = array('onoff');
 $meta['continue'] = array('onoff');
 $meta['spamerror'] = array('string');
+$meta['whitelist'] = array('');
