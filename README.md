@@ -1,4 +1,4 @@
-dokuwiki-botbouncer
+dokuwiki-plugin-botbouncer
 ===================
 
 BotBouncer plugin for Dokuwiki
@@ -22,6 +22,26 @@ write some docs,
 tidy up,
 show statistics,
 clean out existing users
+
+
+StopForumSpam
+
+http://www.stopforumspam.com/ is a free service, although donations are welcome. This plugin will always use this service. 
+
+Akismet
+
+http://akismet.com is an anti-comment-spam service from the makers of Wordpress. When you sign up, you get an API key, which you can enter in the configuration for this plugin to activate it.
+
+Mollom
+
+http://mollom.com is an anti-form-spam service from the makers of Drupal. They have a free service for sites will little activity, and as you to upgrade once you reach a certain activity level.
+When you sign up, you get a private and a public key string, which you can enter in the configuration of this plugin to active using this service.
+
+Project Honey Pot
+
+http://www.projecthoneypot.org?rf=96521 is a free service that uses the DNS system to manage blocking. You need to sign up to get an API key, which you can enter in the configuration for this plugin, to use this service.
+
+
 
 History:
 2013-04-03 version 0.1 - initial setup allowing config and blocking
