@@ -1,6 +1,4 @@
 ====== BotBouncer Statistics ======
 
-This page gives you an overview on the amount of access tries that
-where blocked by the botbouncer plugin in the last days and the
-most common reasons.
+Check back later. This page will have some statistics, but currently this doesn't work yet.
 
