@@ -44,4 +44,5 @@ http://www.projecthoneypot.org?rf=96521 is a free service that uses the DNS syst
 
 
 History:
-2013-04-03 version 0.1 - initial setup allowing config and blocking
+2013-04-22 v0.2 - add whitelist, and central logging
+2013-04-03 v0.1 - initial setup allowing config and blocking

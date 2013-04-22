@@ -55,12 +55,21 @@ class action_plugin_botbouncer extends DokuWiki_Action_Plugin {
         $fsc->setLogRoot($GLOBALS['conf']['cachedir']);
         if ($fsc->isSpam(
           array(
+  #          'test' => 'spam',
+  #          'test' => 'ham',
             'username' => $_SESSION[DOKU_COOKIE]['auth']['info']['name'],
             'email' => $_SESSION[DOKU_COOKIE]['auth']['info']['mail'],
-            'ips' => array($_SERVER['REMOTE_ADDR']),
+  #          'ips' => array($_SERVER['REMOTE_ADDR']),
           ),
           !empty($continue)
         )) {
+          
+          $logLine = time().' matched by "'.$fsc->matchedBy. '" on "'.$fsc->matchedOn.'"';
+#          print 'by '.$fsc->matchedBy.' on '.$fsc->matchedOn.'<br/>';
+          file_put_contents($GLOBALS['conf']['cachedir'].'/botbouncer.log',$logLine."\n",FILE_APPEND);
+          
+          ## @@TODO return a "nice error" ie in the page
+          ## whilst blocking any further action
           print $spamError;exit;
         //} else {
           //print "This is ham";
