@@ -34,7 +34,7 @@ http://akismet.com is an anti-comment-spam service from the makers of Wordpress.
 
 Mollom
 
-http://mollom.com is an anti-form-spam service from the makers of Drupal. They have a free service for sites will little activity, and as you to upgrade once you reach a certain activity level.
+http://mollom.com is an anti-form-spam service from the makers of Drupal. They have a free service for sites with little activity, and as you to upgrade once you reach a certain activity level.
 When you sign up, you get a private and a public key string, which you can enter in the configuration of this plugin to active using this service.
 
 Project Honey Pot
