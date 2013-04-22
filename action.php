@@ -32,7 +32,13 @@ class action_plugin_botbouncer extends DokuWiki_Action_Plugin {
     }
 
     function handle_start(&$event, $param) {
-   
+      ## handle whitelist
+      $whitelist_ips = explode(',',$this->getConf('whitelist'));
+      $whitelist_ips = array_map('trim', $whitelist_ips);
+      if (in_array($_SERVER['REMOTE_ADDR'],$whitelist_ips)) {
+        return;
+      }
+      
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       
        // error_reporting(E_ALL);
