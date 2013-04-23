@@ -40,6 +40,17 @@ class action_plugin_botbouncer extends DokuWiki_Action_Plugin {
       }
       
       if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $isRegister = 0;
+        if ($_REQUEST['do'] == 'register' && $_POST['save'] == 1) {
+            $email = $_POST['email'];
+            $username = $_POST['login'];
+            $content = $_POST['fullname'];
+            $isRegister = 1;
+        } else {
+            $username = $_SESSION[DOKU_COOKIE]['auth']['info']['name'];
+            $email = $_SESSION[DOKU_COOKIE]['auth']['info']['mail'];
+            $content = '';
+        }
       
        // error_reporting(E_ALL);
        // ini_set('display_errors',true);
@@ -55,24 +66,25 @@ class action_plugin_botbouncer extends DokuWiki_Action_Plugin {
         $fsc->setLogRoot($GLOBALS['conf']['cachedir']);
         if ($fsc->isSpam(
           array(
-  #          'test' => 'spam',
-  #          'test' => 'ham',
-            'username' => $_SESSION[DOKU_COOKIE]['auth']['info']['name'],
-            'email' => $_SESSION[DOKU_COOKIE]['auth']['info']['mail'],
-  #          'ips' => array($_SERVER['REMOTE_ADDR']), ## the spambouncer class handles IPs
+   #         'test' => 'spam',
+   #         'test' => 'ham',
+            'username' => $username,
+            'email' => $email,
+            'content' => $content,
           ),
           !empty($continue)
         )) {
           
-          $logLine = time()."\t".$fsc->matchedBy. "\t".$fsc->matchedOn.'"';
-#          print 'by '.$fsc->matchedBy.' on '.$fsc->matchedOn.'<br/>';
-          
-          ## @@TODO return a "nice error" ie in the page
-          ## whilst blocking any further action
-          print $spamError;exit;
+            $logLine = time()."\t".$fsc->matchedBy. "\t".$fsc->matchedOn;
+            unset($_POST['save']);
+            if (!$isRegister) {
+              ## @@TODO return a "nice error" ie in the page
+              ## whilst blocking any further action
+                print $spamError;exit;
+            }
         } else {
-          $logLine = time().' no match';
-          //print "This is ham";
+            $logLine = time().' no match';
+            //print "This is ham";
         }
         file_put_contents($GLOBALS['conf']['cachedir'].'/botbouncer.log',$logLine."\n",FILE_APPEND);
       }
