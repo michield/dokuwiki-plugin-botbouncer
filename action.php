@@ -64,7 +64,7 @@ class action_plugin_botbouncer extends DokuWiki_Action_Plugin {
           !empty($continue)
         )) {
           
-          $logLine = time().' matched by "'.$fsc->matchedBy. '" on "'.$fsc->matchedOn.'"';
+          $logLine = time()."\t".$fsc->matchedBy. "\t".$fsc->matchedOn.'"';
 #          print 'by '.$fsc->matchedBy.' on '.$fsc->matchedOn.'<br/>';
           
           ## @@TODO return a "nice error" ie in the page
