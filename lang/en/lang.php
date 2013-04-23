@@ -5,6 +5,7 @@
 
 // custom language strings for the plugin
 
+$lang['menu'] = 'Botbouncer Statistics';
 $lang['percent'] = 'Percent';
 $lang['count']   = 'Count';
 $lang['reason']  = 'Reason';

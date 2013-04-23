@@ -16,23 +16,14 @@ class admin_plugin_botbouncer extends DokuWiki_Admin_Plugin {
     /**
      * return some info
      */
-    function getInfo(){
+    function getInfo() {
         return confToHash(dirname(__FILE__).'/plugin.info.txt');
     }
     
-    function getMenuText($language) {
-        $menutext = $this->getLang('menu');
-        if (!$menutext) {
-            $info = $this->getInfo();
-            $menutext = $info['name'].' ...';
-        }
-        return $menutext;
-    }
-
     /**
      * Access for managers allowed
      */
-    function forAdminOnly(){
+    function forAdminOnly() {
         return false;
     }
 
@@ -56,19 +47,26 @@ class admin_plugin_botbouncer extends DokuWiki_Admin_Plugin {
         $this->_stats();
     }
     
-    function _stats(){
+    function _stats() {
         print $this->locale_xhtml('stats');
 
         $days = 7;
         $list = $this->_readlines($days);
-
-        $all = 0;
+#var_dump($list);exit;
+        $all = $whitelisted = 0;
         $stats = array();
-        foreach($list as $line){
-            if(!$line) continue;
-            $data = explode("\t",$line);
-            $stats[$data[6]] = (int) $stats[$data[6]] + 1;
-            $all++;
+        foreach ($list as $line){
+            if (!$line) continue;
+            if (preg_match('/is whitelisted$/',$line)) {
+              $stats['whitelisted'] += 1;
+            } elseif (preg_match('/no match$/',$line)) {
+              $stats['not spam'] += 1;
+            } else {
+              $data = explode("\t",$line);
+#              var_dump($data);
+              $stats[$data[1].' '.$data[2]] = (int) $stats[$data[1].' '.$data[2]] + 1;
+              $all++;
+            }
         }
         arsort($stats);
 
@@ -80,7 +78,7 @@ class admin_plugin_botbouncer extends DokuWiki_Admin_Plugin {
         echo '<th>'.$this->getLang('count').'</th>';
         echo '<th>'.$this->getLang('reason').'</th>';
         echo '</tr>';
-        foreach($stats as $code => $count){
+        foreach ($stats as $code => $count){
             echo '<tr>';
             echo '<td>';
             printf("%.2f%%",100*$count/$all);
@@ -89,7 +87,7 @@ class admin_plugin_botbouncer extends DokuWiki_Admin_Plugin {
             echo $count;
             echo '</td>';
             echo '<td>';
-     #       echo $resp['log'];
+            echo $code;
             echo '</td>';
             echo '</tr>';
         }
@@ -98,10 +96,12 @@ class admin_plugin_botbouncer extends DokuWiki_Admin_Plugin {
 
     /**
      * Read loglines backward
+     * 
+     * taken from dokuwiki captcha plugin
      */
     function _readlines($days=7){
         global $conf;
-        $file = $conf['cachedir'].'/munin-graph2013-03-28.log';
+        $file = $conf['cachedir'].'/botbouncer.log';
 
         $date  = time() - ($days*24*60*60);
 
@@ -121,10 +121,10 @@ class admin_plugin_botbouncer extends DokuWiki_Admin_Plugin {
         while($pos){
 
             // how much to read? Set pointer
-            if($pos > $chunk_size){
+            if ($pos > $chunk_size){
                 $pos -= $chunk_size;
                 $read = $chunk_size;
-            }else{
+            } else {
                 $read = $pos;
                 $pos  = 0;
             }
@@ -148,7 +148,7 @@ class admin_plugin_botbouncer extends DokuWiki_Admin_Plugin {
 
             // check date of first line:
             list($cdate) = explode("\t",$cparts[0]);
-            if($cdate < $date) break; // we have enough
+            if ($cdate < $date) break; // we have enough
         }
         fclose($fp);
 
