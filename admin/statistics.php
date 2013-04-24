@@ -11,13 +11,13 @@ require_once(DOKU_PLUGIN.'admin.php');
  * All DokuWiki plugins to extend the admin function
  * need to inherit from this class
  */
-class admin_plugin_botbouncer extends DokuWiki_Admin_Plugin {
+class admin_plugin_botbouncer_statistics extends DokuWiki_Admin_Plugin {
 
     /**
      * return some info
      */
     function getInfo() {
-        return confToHash(dirname(__FILE__).'/plugin.info.txt');
+        return confToHash(dirname(__FILE__).'/../plugin.info.txt');
     }
     
     /**
@@ -25,6 +25,10 @@ class admin_plugin_botbouncer extends DokuWiki_Admin_Plugin {
      */
     function forAdminOnly() {
         return false;
+    }
+    
+    function getMenuText($language) {
+        return $this->getLang('menu_statistics');
     }
 
     /**
@@ -47,12 +51,12 @@ class admin_plugin_botbouncer extends DokuWiki_Admin_Plugin {
         $this->_stats();
     }
     
+    
     function _stats() {
         print $this->locale_xhtml('stats');
 
         $days = 7;
         $list = $this->_readlines($days);
-#var_dump($list);exit;
         $all = $whitelisted = 0;
         $stats = array();
         foreach ($list as $line){
@@ -63,7 +67,6 @@ class admin_plugin_botbouncer extends DokuWiki_Admin_Plugin {
               $stats['not spam'] += 1;
             } else {
               $data = explode("\t",$line);
-#              var_dump($data);
               $stats[$data[1].' '.$data[2]] = (int) $stats[$data[1].' '.$data[2]] + 1;
               $all++;
             }
