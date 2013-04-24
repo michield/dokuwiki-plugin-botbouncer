@@ -1,4 +1,3 @@
 ====== BotBouncer Statistics ======
 
-Check back later. This page will have some statistics, but currently this doesn't work yet.
-
+This page shows some statistics on which services blocked what.

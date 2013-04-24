@@ -1,0 +1,4 @@
+====== BotBouncer Clean ======
+
+The idea here is to clean out your existing users from spammed entries.
+This is unfinished.
